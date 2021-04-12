@@ -43,21 +43,19 @@
           pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="6"
           [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
        
-          <div *ngIf="isValidInput('password')" class="text-danger pl-3">
+          <div *ngIf="isValidInput('password')" class="text-danger pl-3 pt-1">
           <small *ngIf="validateRequired('password')">
-            <br>
-           • Passsword is required.
+           <p>  • Passsword is required.  </p>
           </small>
           <small *ngIf="validatePattern('password')">
-            <br>
-           • Password must be at least 6 characters [A-z]/[symbol]/[0-9].
+           <p> • Password must be at least 6 characters [A-z]/[symbol]/[0-9].</p>
           </small>
           <small *ngIf="!validateLength('password')">
-            <br>
-           • Passsword Must be at least 6 characters.
+          <p>• Passsword Must be at least 6 characters.</p>           
           </small>
         </div>
       </div>
+
 
       
         <div class="form-group">
