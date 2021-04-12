@@ -1,0 +1,26 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    background-color: #212121;
+    padding: 1rem 0rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#foot {
+    margin: 0 30px;
+}
+
+svg {
+    transition: all .3s ease-in-out;
+    &:hover {
+        fill: #fff;
+    }
+}
+
+* {
+    text-align: center;
+}
