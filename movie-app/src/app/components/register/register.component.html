@@ -1,0 +1,78 @@
+
+<div class="d-flex justify-content-center ">
+
+  <div class="card mt-5">
+    
+    <div class="card-body" *ngIf="authService.user | async">
+      <h4>Welcome <i>{{ (authService.user | async)?.email }}</i>!</h4>
+      <button (click)="logout()" class="btn btn-success">
+        Logout
+      </button>
+    </div>
+
+
+    <div class="card-body" *ngIf="!(authService.user | async)" >  
+      <h4 class="card-header">Register</h4>
+      <form [formGroup]="registerationForm" (ngSubmit)="register()">
+      <!-- {{registerationForm.value |json}} -->
+
+      <div class="form-group">
+        <label for="email">email:</label>
+        <input type="text" formControlName="email" class="form-control" minlength="6"
+        pattern="^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$"
+          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+
+        <div *ngIf="isValidInput('email')" class="text-danger pl-3 pt-1">
+          <small *ngIf="validatePattern('email')" >
+           <p> • email must be match on email pattern : abc@abc.abc.</p>
+          </small>
+          <small *ngIf="validateRequired('email')">
+            <p>• email is required.</p>
+          </small>
+          <small *ngIf="!validateLength('email')">
+            <p>• email Must be at least 6 characters.</p>
+          </small>
+        </div>
+      </div>
+
+      
+      
+      <div class="form-group">
+        <label for="password"> Password:</label>
+        <input type="password" formControlName="password" class="form-control"
+          pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" minlength="6"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+       
+          <div *ngIf="isValidInput('password')" class="text-danger pl-3">
+          <small *ngIf="validateRequired('password')">
+            <br>
+           • Passsword is required.
+          </small>
+          <small *ngIf="validatePattern('password')">
+            <br>
+           • Password must be at least 6 characters [A-z]/[symbol]/[0-9].
+          </small>
+          <small *ngIf="!validateLength('password')">
+            <br>
+           • Passsword Must be at least 6 characters.
+          </small>
+        </div>
+      </div>
+
+      
+        <div class="form-group">
+          <div class="error" *ngIf="authService.err">
+            <h6 class="text-danger p-1">{{ authService.err }}</h6>
+            <br>
+          </div>
+
+         <button [disabled]="registerationForm.invalid" type="submit" class="btn btn-primary">
+          <span *ngIf="loading&&!authService.err" class="spinner-border spinner-border-sm mr-1"></span>
+          Register
+        </button>
+          <a routerLink="../login" class="btn btn-link">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
