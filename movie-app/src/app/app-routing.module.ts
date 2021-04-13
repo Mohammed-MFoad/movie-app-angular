@@ -6,9 +6,7 @@ import { MovieDetailsComponent } from './components/movies/movie-details/movie-d
 import { MoviesComponent } from './components/movies/movies/movies.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/movies', pathMatch: 'full' },
   { path: 'movies/:dept', component: MoviesComponent },
   { path: 'movies', component: MoviesComponent },
   { path: 'movie/:id',component: MovieDetailsComponent},

@@ -1,13 +1,11 @@
 
-<div class="d-flex justify-content-center ">
-
-  <div class="card mt-5">
+  <div class="card ">
     
     <div class="card-body" *ngIf="authService.user | async">
       <h4>Welcome <i>{{ (authService.user | async)?.email }}</i>!</h4>
-      <button (click)="logout()" class="btn btn-success">
+      <!-- <button (click)="logout()" class="btn btn-success">
         Logout
-      </button>
+      </button> -->
     </div>
 
 
@@ -68,9 +66,8 @@
           <span *ngIf="loading&&!authService.err" class="spinner-border spinner-border-sm mr-1"></span>
           Register
         </button>
-          <a routerLink="../login" class="btn btn-link">Login</a>
+          <!-- <a (click)="open(content)" class="btn btn-link">Login</a> -->
         </div>
       </form>
     </div>
-  </div>
   </div>

@@ -1,19 +1,29 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-  <a  href="../movies/topRated" ><span>Movies</span></a>
-
+  <a  href="../movies/topRated" ><span>Movies</span></a>&nbsp;
+  <small class="text-success" *ngIf="(authService.user | async)"> welcome {{ (authService.user | async)?.email |slice:0:8 }} </small>
   <div class="d-flex ml-auto ">
     <div class="navbar-nav ml-auto">
-      <a  href="../movies/upcoming"  class="nav-item nav-link">Upcoming Movies</a>
+      <a  href="../movies/upcoming"  class="nav-item nav-link text-light">Upcoming Movies</a>
     </div>
     &nbsp;&nbsp;
     <div class="navbar-nav ml-auto">
-      <a href="../movies/nowPlaying"  class="nav-item nav-link">Now Playing Movies</a>
+      <a href="../movies/nowPlaying"  class="nav-item nav-link text-light">Now Playing Movies</a>
     </div>
-    
+    <!-- href="../login" -->
     &nbsp;&nbsp;
     <div class="navbar-nav ml-auto" *ngIf="!(authService.user | async)">
-      <a class="btn btn-primary" href="../login" >
+      <a (click)="open(login)" class="btn btn-primary" >
         Login
+        <ng-template #login let-modal>
+          <app-login></app-login>
+        </ng-template>
+      </a>
+      &nbsp;
+      <a (click)="open(register)" class="btn btn-dark" >
+        Register
+        <ng-template #register let-modal>
+          <app-register></app-register>
+        </ng-template>
       </a>
     </div>
 
@@ -25,5 +35,5 @@
     </div>
 
   </div>
-
+  
 </nav>

@@ -22,6 +22,7 @@ import { MoviesComponent } from './components/movies/movies/movies.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';  
 import { MovieDetailsComponent } from './components/movies/movie-details/movie-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { MovieDetailsComponent } from './components/movies/movie-details/movie-d
     AngularFirestoreModule,
     MatPaginatorModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    NgbModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
