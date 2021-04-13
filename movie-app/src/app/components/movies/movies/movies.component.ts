@@ -75,7 +75,7 @@ export class MoviesComponent implements OnInit {
     }
   }
   getTopRatedMovies(page: number) {
-    this.movieService.getTopRatedMovies(page).pipe(delay(2000)).subscribe((res: any) => {
+    this.movieService.getTopRatedMovies(page).pipe(delay(1000)).subscribe((res: any) => {
       this.movies = res.results;
       this.totalResults = res.total_results;
       this.loader = false;
@@ -83,7 +83,7 @@ export class MoviesComponent implements OnInit {
     error => console.log(error));
   }
   getUpComingMovies(page: number) {
-    this.movieService.getUpComingMovies(page).pipe(delay(2000)).subscribe((res: any) => {
+    this.movieService.getUpComingMovies(page).pipe(delay(1000)).subscribe((res: any) => {
       this.movies = res.results;
       this.totalResults = res.total_results;
       this.loader = false;
@@ -91,7 +91,7 @@ export class MoviesComponent implements OnInit {
     error => console.log(error));
   }
   getNowPlaying(page: number) {
-    this.movieService.getNowPlaying(page).pipe(delay(2000)).subscribe((res: any) => {
+    this.movieService.getNowPlaying(page).pipe(delay(1000)).subscribe((res: any) => {
       this.movies = res.results;
       this.totalResults = res.total_results;
       this.loader = false;
@@ -100,7 +100,15 @@ export class MoviesComponent implements OnInit {
   }
   changePage(event) {
     this.loader = true;
-    this.getTopRatedMovies(event.pageIndex + 1);
+    if (this.nowPlaying) {
+      this.getNowPlaying(event.pageIndex + 1);
+    }
+    else if(this.upcoming){
+      this.getUpComingMovies(event.pageIndex + 1);
+    }
+    else{
+      this.getTopRatedMovies(event.pageIndex + 1);
+    }
   }
 
 }
