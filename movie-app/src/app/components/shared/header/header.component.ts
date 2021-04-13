@@ -16,6 +16,10 @@ export class HeaderComponent implements OnInit {
     console.log('User is successfully logged out.')
     this.authService.signOut();
   }
+  openAndLogout(logout){
+    this.open(logout);
+    this.logout();
+  }
  open(content):void{
    this.modalService.open(content)
   }
