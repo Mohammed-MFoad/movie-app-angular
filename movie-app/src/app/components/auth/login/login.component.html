@@ -4,6 +4,7 @@
   <div class="card mt-5">
     
     <div class="card-body" *ngIf="authService.user | async">
+      {{(authService.user| async)?.uid}}
       <h4>Welcome <i>{{ (authService.user | async)?.email }}</i>!</h4>
       <button (click)="logout()" class="btn btn-success">
         Logout

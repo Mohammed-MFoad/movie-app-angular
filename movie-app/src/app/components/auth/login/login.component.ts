@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   emailAddress: string;
   password: string;
+  userId: string="";
 
   constructor(
     public authService: AuthService,

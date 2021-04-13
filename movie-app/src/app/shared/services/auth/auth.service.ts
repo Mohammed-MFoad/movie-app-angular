@@ -21,6 +21,7 @@ export class AuthService {
       .createUserWithEmailAndPassword(emailAddress, password)
       .then(value => {
         console.log('Success! User is successfully registered.', value.user.email);
+        localStorage.setItem('user', JSON.stringify(value.user));
       })
       .catch(error => {
         this.err = error.message;
@@ -34,6 +35,7 @@ export class AuthService {
       .signInWithEmailAndPassword(emailAddress, password)
       .then(value => {
         console.log('User successfully logged in!');
+        localStorage.setItem('user', JSON.stringify(value.user));
       })
       .catch(error => {
         this.err = error.message;
@@ -45,5 +47,6 @@ export class AuthService {
   signOut() {
     this.firebaseAuth
       .signOut();
+      localStorage.removeItem('user');
   }
 }
