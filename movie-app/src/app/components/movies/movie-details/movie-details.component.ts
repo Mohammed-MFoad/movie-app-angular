@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { ModalService } from 'src/app/shared/services/modal/modal.service';
 import { MoviesService } from '../../../shared/services/movies/movies.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class MovieDetailsComponent implements OnInit {
 
   constructor( private activatedRoute: ActivatedRoute,
     private movieService: MoviesService,
-    public authService: AuthService,) { 
+    public authService: AuthService,
+    private modalService: ModalService) { 
 
      
       
@@ -72,5 +74,7 @@ export class MovieDetailsComponent implements OnInit {
     }
     this.comment = ""
   }
-
+  open(content):void{
+    this.modalService.open(content)
+   }
 }

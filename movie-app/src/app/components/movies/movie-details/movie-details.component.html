@@ -31,7 +31,10 @@
 
         <div class="d-flex" *ngIf="!(authService.user| async)">
           <div class="text-center">
-            <b class="">To comment or add to favourite please <a href="../login">login</a> </b>
+            <b class="">To comment or add to favourite please <a (click)="open(login)" class="text-primary">login</a> </b>
+            <ng-template #login let-modal>
+              <app-login></app-login>
+            </ng-template>
           </div>
         </div>
 
