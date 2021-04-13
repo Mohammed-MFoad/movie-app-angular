@@ -1,3 +1,26 @@
-<p>
-  movie-details works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col p-0">
+      <img [src]="img + movie.poster_path">
+    </div>
+    <div class="col mt-4">
+      <h4>{{ movie.title }}</h4>
+      <hr>
+      <p>
+        {{ movie.release_date }} -
+        <span *ngFor="let genre of movie.genres">
+          {{ genre.name }} -
+        </span>
+        {{ movie.runtime }} minutes
+      </p>
+      <p>
+        User's Score: {{ movie.vote_average }}
+      </p>
+      <p>
+        {{ movie.overview }}
+      </p>
+      <hr>
+
+    </div>
+  </div>
+</div>
