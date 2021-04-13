@@ -29,8 +29,14 @@
         </p>
         <hr>
 
+        <div class="d-flex" *ngIf="!(authService.user| async)">
+          <div class="text-center">
+            <b class="">To comment or add to favourite please <a href="../login">login</a> </b>
+          </div>
+        </div>
 
-        <div class="d-flex">
+
+        <div class="d-flex" *ngIf="authService.user| async">
           <div class="text-center">
             <svg class="heart" viewBox="0 0 32 29.6">
               <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
@@ -41,7 +47,7 @@
           </div>
 
         </div>
-        <div class="row">
+        <div class="row" *ngIf="authService.user| async">
           <div class="col-12">
             <div class="comments">
               

@@ -1,8 +1,13 @@
 <app-header></app-header>
 <br><br>
-<div class="listing">
+
+<div class="alert alert-info" *ngIf="loader">
+    <h5>Loading Movies...   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></h5>
+  </div>
+
+<div class="listing" *ngIf="!loader">
   <div class="container-fluid mt-4">
-    <h4>Popular Movies</h4>
+    <h4>Top Rated Movies</h4>
     <hr>
     <div class="row">
         <div 
