@@ -48,7 +48,7 @@
               <div class="comment-box add-comment p-5">
                 <span class="commenter-name pt-3 pr-5">
                   <input [(ngModel)]="comment" id="commentInput" type="text" placeholder="Add a public comment" name="Add Comment">
-                  <button type="submit" class="btn btn-default" (click) = "appendComment()">Comment</button>
+                  <button type="submit" class="btn btn-default" (click) = "appendComment()" [disabled]="!comment">Comment</button>
                   <button type="cancel" class="btn btn-default">Cancel</button>
                 </span>
               </div>
