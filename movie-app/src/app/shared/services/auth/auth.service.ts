@@ -10,7 +10,7 @@ export class AuthService {
  
   user: Observable<firebase.User>;
   err: String;
-   loggedIn: boolean;
+  // loggedIn: boolean=false;
   constructor(private firebaseAuth: AngularFireAuth) {
     this.user = firebaseAuth.authState;
   }
@@ -22,7 +22,7 @@ export class AuthService {
       .then(value => {
         console.log('Success! User is successfully registered.', value.user.email);
         localStorage.setItem('user', JSON.stringify(value.user));
-        this.loggedIn = true;
+        // this.loggedIn = true;
       })
       .catch(error => {
         this.err = error.message;
@@ -37,7 +37,7 @@ export class AuthService {
       .then(value => {
         console.log('User successfully logged in!');
         localStorage.setItem('user', JSON.stringify(value.user));
-        this.loggedIn = true;
+        // this.loggedIn = true;
       })
       .catch(error => {
         this.err = error.message;
@@ -50,6 +50,6 @@ export class AuthService {
     this.firebaseAuth
       .signOut();
       localStorage.removeItem('user');
-      this.loggedIn = false;
+      // this.loggedIn = false;
     }
 }

@@ -31,8 +31,9 @@ export class MovieDetailsComponent implements OnInit {
     }
 
   ngOnInit() {
-    if (this.authService.loggedIn) {
-      this.authService.user.subscribe(user => this.emailSignedIn = user.email)
+    if (JSON.parse( localStorage.getItem("user"))) {
+      this.authService.user.subscribe(user => {this.emailSignedIn = user.email
+      })
     }
     this.activatedRoute.params
     .pipe(
