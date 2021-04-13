@@ -1,35 +1,74 @@
 <app-header></app-header>
-<div class="alert alert-info" *ngIf="!movie">
+
+<div class="alert alert-info" *ngIf="!movie&&!movieId">
   Loading Movie...
 </div>
 
-<div *ngIf="movie">
-<div class="container-fluid">
-  <div class="row">
-    <div class="col p-0">
-      <img [src]="img + movie.poster_path">
-    </div>
-    <div class="col mt-4">
-      <h4>{{ movie.title }}</h4>
-      <hr>
-      <p>
-        {{ movie.release_date }} -
-        <span *ngFor="let genre of movie.genres">
-          {{ genre.name }} -
-        </span>
-        {{ movie.runtime }} minutes
-      </p>
-      <p>
-        User's Score: {{ movie.vote_average }}
-      </p>
-      <p>
-        {{ movie.overview }}
-      </p>
-      <hr>
+<div *ngIf="movie&&movieId">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col p-0 pt-5">
+        <img [src]="img + movie.poster_path">
+      </div>
+      <div class="col mt-4">
+        <br><br>
+        <h4>{{ movie.title }}</h4>
+        <hr>
+        <p>
+          {{ movie.release_date }} -
+          <span *ngFor="let genre of movie.genres">
+            {{ genre.name }} -
+          </span>
+          {{ movie.runtime }} minutes
+        </p>
+        <p>
+          User's Score: {{ movie.vote_average }}
+        </p>
+        <p>
+          {{ movie.overview }}
+        </p>
+        <hr>
+
+
+        <div class="d-flex">
+          <div class="text-center">
+            <svg class="heart" viewBox="0 0 32 29.6">
+              <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+               c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z" />
+            </svg>
+            &nbsp;
+            <b>Add to favourites</b>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="comments">
+              
+              <div class="comment-box add-comment p-5">
+                <span class="commenter-name pt-3 pr-5">
+                  <input [(ngModel)]="comment" id="commentInput" type="text" placeholder="Add a public comment" name="Add Comment">
+                  <button type="submit" class="btn btn-default" (click) = "appendComment()">Comment</button>
+                  <button type="cancel" class="btn btn-default">Cancel</button>
+                </span>
+              </div>
+
+              <div id="commentBox" class="comment-box pt-5" *ngFor="let comment of comments" >
+                <span class="commenter-name">
+                  <b class="text-primary">{{comment.email}}</b>
+                </span>
+                <p class="comment-txt more pl-5">{{comment.comment}}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
     </div>
   </div>
-</div>
 </div>
 
 
