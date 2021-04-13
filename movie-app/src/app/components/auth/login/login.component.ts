@@ -14,25 +14,26 @@ export class LoginComponent implements OnInit {
   submitted = false;
   backWithErro = false;
   message: string = '';
-
+  userId: string;
   emailAddress: string;
   password: string;
-  userId: string="";
-
+  
   constructor(
     public authService: AuthService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-       email: ['', Validators.required],
+    ) {
+      
+    }
+    
+    ngOnInit() {
+      this.loginForm = this.formBuilder.group({
+        email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-
+  
   isValidInput(fieldName): boolean {
     return (
       this.loginForm.controls[fieldName].invalid &&
@@ -66,6 +67,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authService.signIn(this.emailAddress, this.password);
     this.emailAddress = this.password = '';
+    // this.authService.user.subscribe(user => this.userId = user.uid)
+    // this.router.navigate([`../${this.userId}/movies`], { relativeTo: this.route });
   }
   logout(): void {
     console.log('User is successfully logged out.')

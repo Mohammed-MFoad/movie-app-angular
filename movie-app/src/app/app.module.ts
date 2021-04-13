@@ -20,6 +20,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MoviesComponent } from './components/movies/movies/movies.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';  
+import { MovieDetailsComponent } from './components/movies/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    MoviesComponent
+    MoviesComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     AngularFirestoreModule,
     MatPaginatorModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
