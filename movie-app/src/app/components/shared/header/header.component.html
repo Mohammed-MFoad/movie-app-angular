@@ -1,13 +1,29 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top">
   <a href=""><span>Movies</span></a>
-<div class="d-flex ml-auto ">
-  <div class="navbar-nav ml-auto">
-      <a href="movie" class="nav-item nav-link">Upcoming  Movies</a>
+
+  <div class="d-flex ml-auto ">
+    <div class="navbar-nav ml-auto">
+      <a href="movie" class="nav-item nav-link">Upcoming Movies</a>
+    </div>
+    &nbsp;&nbsp;
+    <div class="navbar-nav ml-auto">
+      <a href="now" class="nav-item nav-link">Now Playing Movies</a>
+    </div>
+    
+    &nbsp;&nbsp;
+    <div class="navbar-nav ml-auto" *ngIf="!(authService.user | async)">
+      <button class="btn btn-primary" routerLink="../login" >
+        Login
+      </button>
+    </div>
+
+    &nbsp;&nbsp;
+    <div class="navbar-nav ml-auto" *ngIf="authService.user | async">
+      <button (click)="logout()" class="btn btn-success">
+        Logout
+      </button>
+    </div>
+
   </div>
-  &nbsp;&nbsp;
-  <div class="navbar-nav ml-auto">
-    <a href="now" class="nav-item nav-link">Now Playing Movies</a>
-</div>
-</div>
 
 </nav>
