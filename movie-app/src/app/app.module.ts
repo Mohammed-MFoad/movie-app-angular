@@ -11,11 +11,15 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
-import { AuthService } from './shared/services/auth.service';
+import { AuthService } from './shared/services/auth/auth.service';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { MoviesComponent } from './components/movies/movies/movies.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    MoviesComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +38,8 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatPaginatorModule,
+    HttpClientModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
