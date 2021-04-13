@@ -29,7 +29,9 @@ export class MovieDetailsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.authService.user.subscribe(user => this.emailSignedIn = user.email)
+    if (this.authService.loggedIn) {
+      this.authService.user.subscribe(user => this.emailSignedIn = user.email)
+    }
     this.activatedRoute.params
     .pipe(
       switchMap( ({id}) => this.movieService.getMovie(id)  )

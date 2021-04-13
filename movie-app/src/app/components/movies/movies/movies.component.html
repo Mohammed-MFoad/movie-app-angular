@@ -3,16 +3,32 @@
 
 <div class="alert alert-info" *ngIf="loader">
     <h5>Loading Movies...   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></h5>
-  </div>
+</div>
 
-<div class="listing" *ngIf="!loader">
+<div *ngIf="movies">
   <div class="container-fluid mt-4">
-    <h4>Top Rated Movies</h4>
+
+    <div *ngIf="topRated">
+        <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
+           Top Rated Movies
+        </marquee>
+    </div>
+    <div *ngIf="nowPlaying">
+        <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
+            Now Playing Movies 
+        </marquee>
+    </div>
+    <div *ngIf="upcoming">
+        <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
+            Upcoming Movies 
+        </marquee>
+    </div>
+
     <hr>
     <div class="row">
         <div 
             class="col mb-4"
-            *ngFor="let movie of topRated"
+            *ngFor="let movie of movies"
         >
             <a 
                 [routerLink]="['/movie', movie.id]"
@@ -25,21 +41,24 @@
                 </small>
             </a>
         </div>
-        <button 
+        <!-- <button 
             class="btn btn-primary"
             type="button" 
             disabled
-            *ngIf="!(topRated.length > 0)"
+            *ngIf="!(movies.length > 0)"
         >
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Loading...
-        </button>
+        </button> -->
     </div>
 </div>
 
-  
+  <div class="d-flex justify-content-center">
   <mat-paginator [length]="totalResults" [pageSize]="20" (page)="changePage($event)"></mat-paginator>
-  
+  <div class="" *ngIf="loader">
+    <span class="spinner-border spinner-border-sm mt-3" role="status" aria-hidden="true"></span>
+</div>
+  </div>
 </div>
 <br><br><br><br>
 <app-footer></app-footer>
