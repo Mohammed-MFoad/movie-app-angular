@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { interval } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { ModalService } from 'src/app/shared/services/modal/modal.service';
 import { MoviesService } from '../../../shared/services/movies/movies.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-movie-details',
@@ -15,11 +17,13 @@ export class MovieDetailsComponent implements OnInit {
   related: any[] = []
   img: string = "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/"
   img2: string = "https://www.themoviedb.org/t/p/w250_and_h141_face/"
-
+  public smth$ = interval(100);
   comments:any =  []
+  favourites:any =  []
   emailSignedIn:string;
   comment:string;
   movieId:string;
+  addedToFavourite: boolean= false;
 
   constructor( private activatedRoute: ActivatedRoute,
     private movieService: MoviesService,
@@ -31,10 +35,34 @@ export class MovieDetailsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.emailSignedIn= "";
     if (JSON.parse( localStorage.getItem("user"))) {
-      this.authService.user.subscribe(user => {this.emailSignedIn = user.email
+      this.authService.user.subscribe(user => {
+        this.emailSignedIn = user.email
+
+      if (this.emailSignedIn !== "" && this.emailSignedIn) {
+        this.favourites = JSON.parse( localStorage.getItem("FavouriteFor"+this.emailSignedIn))
+        if (this.favourites && this.favourites !==[]) {
+          this.favourites.forEach(element => {
+            (element.id == this.movieId)? this.addedToFavourite =true : this.addedToFavourite = false;
+          });
+        }
+      }
+
+
+
+        // if (this.emailSignedIn !== "" && this.emailSignedIn) {
+        //   this.addedToFavourite = true;
+        //   console.log(this.emailSignedIn);
+        // }
+        // else{
+        //   this.addedToFavourite = true;
+        //   console.log(this.emailSignedIn);
+        // }
+
       })
     }
+    
     this.activatedRoute.params
     .pipe(
       switchMap( ({id}) => this.movieService.getMovie(id)  )
@@ -46,9 +74,6 @@ export class MovieDetailsComponent implements OnInit {
         console.log(this.movieId);
         console.log(this.comments);
       });
-    
-  }
-  getComments(){
     
   }
   appendComment()
@@ -74,6 +99,36 @@ export class MovieDetailsComponent implements OnInit {
       localStorage.setItem(("commentsFor"+this.movieId), (JSON.stringify(this.comments)))
     }
     this.comment = ""
+  }
+  addToFavourite(){
+    let newFavourite = {
+      id:this.movieId,
+    }
+    if(this.favourites){
+      this.favourites.push(newFavourite)
+       console.log(this.favourites);
+      localStorage.setItem(("FavouriteFor"+this.emailSignedIn), (JSON.stringify(this.favourites)))
+    }
+    else{
+      this.favourites=[]
+      this.favourites.push(newFavourite)
+      console.log(this.favourites);
+      localStorage.setItem(("FavouriteFor"+this.emailSignedIn), (JSON.stringify(this.favourites)))
+    }
+    window.location.reload(true);
+  }
+  removeFromFavourite(){
+    let deletedFavourite = {
+      id:this.movieId,
+    }
+    let tempArr = [];
+    if (this.favourites && this.favourites !==[]) {
+      this.favourites.forEach(element => {
+        (element.id != this.movieId)? tempArr.push(element) : this.addedToFavourite = false;
+      });
+    }
+    this.favourites = tempArr;
+    localStorage.setItem(("FavouriteFor"+this.emailSignedIn), (JSON.stringify(this.favourites)))
   }
   open(content):void{
     this.modalService.open(content)
