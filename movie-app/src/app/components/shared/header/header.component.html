@@ -14,22 +14,21 @@
       <a href="../favourites"  class="nav-item nav-link ">Favourites</a>
     </div>
     <!-- href="../login" -->
-    &nbsp;&nbsp;
-    <div class="navbar-nav ml-auto" *ngIf="!(authService.user | async)">
-      <a (click)="open(login)" class="btn btn-primary" >
+    <div class="navbar-nav flex-row ml-auto" *ngIf="!(authService.user | async)">
+      <button (click)="open(login)" class="btn btn-primary" >
         Login
-        <ng-template #login let-modal>
-          <app-login></app-login>
-        </ng-template>
-      </a>
+      </button>
       &nbsp;
-      <a (click)="open(register)" class="btn btn-dark" >
+      <button (click)="open(register)" class="btn btn-dark" >
         Register
-        <ng-template #register let-modal>
-          <app-register></app-register>
-        </ng-template>
-      </a>
+      </button>
     </div>
+    <ng-template #login let-modal>
+      <app-login></app-login>
+    </ng-template>
+    <ng-template #register let-modal>
+      <app-register></app-register>
+    </ng-template>
 
     &nbsp;&nbsp;
     <div class="navbar-nav ml-auto" *ngIf="authService.user | async">
