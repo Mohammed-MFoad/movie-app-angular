@@ -29,9 +29,6 @@ export class MovieDetailsComponent implements OnInit {
     private movieService: MoviesService,
     public authService: AuthService,
     private modalService: ModalService) { 
-
-     
-      
     }
 
   ngOnInit() {
@@ -44,22 +41,10 @@ export class MovieDetailsComponent implements OnInit {
         this.favourites = JSON.parse( localStorage.getItem("FavouriteFor"+this.emailSignedIn))
         if (this.favourites && this.favourites !==[]) {
           this.favourites.forEach(element => {
-            (element.id == this.movieId)? this.addedToFavourite =true : this.addedToFavourite = false;
+            (element.id = this.movieId)? this.addedToFavourite =true : this.addedToFavourite = false;
           });
         }
       }
-
-
-
-        // if (this.emailSignedIn !== "" && this.emailSignedIn) {
-        //   this.addedToFavourite = true;
-        //   console.log(this.emailSignedIn);
-        // }
-        // else{
-        //   this.addedToFavourite = true;
-        //   console.log(this.emailSignedIn);
-        // }
-
       })
     }
     
@@ -104,6 +89,7 @@ export class MovieDetailsComponent implements OnInit {
     let newFavourite = {
       id:this.movieId,
     }
+    this.favourites = JSON.parse( localStorage.getItem("FavouriteFor"+this.emailSignedIn))
     if(this.favourites){
       this.favourites.push(newFavourite)
        console.log(this.favourites);
@@ -115,7 +101,11 @@ export class MovieDetailsComponent implements OnInit {
       console.log(this.favourites);
       localStorage.setItem(("FavouriteFor"+this.emailSignedIn), (JSON.stringify(this.favourites)))
     }
-    window.location.reload(true);
+    console.log(newFavourite);
+    console.log(this.favourites);
+    console.log(this.movieId);
+
+      window.location.reload(true);
   }
   removeFromFavourite(){
     let deletedFavourite = {

@@ -2,46 +2,40 @@
 <br><br>
 
 <div class="alert alert-info" *ngIf="loader">
-    <h5>Loading Movies...   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></h5>
+    <h5>Loading Movies... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></h5>
 </div>
 
 <div *ngIf="movies">
-  <div class="container-fluid mt-4">
+    <div class="container-fluid mt-4">
 
-    <div *ngIf="topRated">
-        <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
-           Top Rated Movies
-        </marquee>
-    </div>
-    <div *ngIf="nowPlaying">
-        <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
-            Now Playing Movies 
-        </marquee>
-    </div>
-    <div *ngIf="upcoming">
-        <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
-            Upcoming Movies 
-        </marquee>
-    </div>
-
-    <hr>
-    <div class="row">
-        <div 
-            class="col mb-4"
-            *ngFor="let movie of movies"
-        >
-            <a 
-                [routerLink]="['/movie', movie.id]"
-                class="text-decoration-none text-reset"
-            >
-                <img [src]="img + movie.poster_path">
-                <h6 class="mb-0">{{ movie.title}}</h6>
-                <small class="mt-0"> 
-                    {{ movie.vote_average }} - {{ movie.release_date | date }} 
-                </small>
-            </a>
+        <div *ngIf="topRated">
+            <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
+                Top Rated Movies
+            </marquee>
         </div>
-        <!-- <button 
+        <div *ngIf="nowPlaying">
+            <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
+                Now Playing Movies
+            </marquee>
+        </div>
+        <div *ngIf="upcoming">
+            <marquee style="color: #000; font-size:x-large; font-weight:500px;" behavior="alternate">
+                Upcoming Movies
+            </marquee>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col mb-4" *ngFor="let movie of movies">
+                <a [routerLink]="['/movie', movie.id]" class="text-decoration-none text-reset">
+                    <img [src]="img + movie.poster_path">
+                    <h6 class="mb-0">{{ movie.title}}</h6>
+                    <small class="mt-0">
+                        {{ movie.vote_average }} - {{ movie.release_date | date }}
+                    </small>
+                </a>
+            </div>
+            <!-- <button 
             class="btn btn-primary"
             type="button" 
             disabled
@@ -50,15 +44,15 @@
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Loading...
         </button> -->
+        </div>
     </div>
-</div>
 
-  <div class="d-flex justify-content-center">
-  <mat-paginator [length]="totalResults" [pageSize]="20" (page)="changePage($event)"></mat-paginator>
-  <div class="" *ngIf="loader">
-    <span class="spinner-border spinner-border-sm mt-3" role="status" aria-hidden="true"></span>
-</div>
-  </div>
+    <div class="d-flex justify-content-center">
+        <mat-paginator [length]="totalResults" [pageSize]="20" (page)="changePage($event)"></mat-paginator>
+        <div class="" *ngIf="loader">
+            <span class="spinner-border spinner-border-sm mt-3" role="status" aria-hidden="true"></span>
+        </div>
+    </div>
 </div>
 <br><br><br><br>
 <app-footer></app-footer>

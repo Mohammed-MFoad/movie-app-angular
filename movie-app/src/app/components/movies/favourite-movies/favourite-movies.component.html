@@ -1,0 +1,43 @@
+<app-header></app-header>
+<br><br>
+
+<div class="alert alert-info" *ngIf="loader">
+  <h5>Loading Movies... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></h5>
+</div>
+
+<div *ngIf="!loader">
+  <div class="container-fluid mt-4 ">
+
+    <div>
+      <marquee style="color: #000; font-size:x-large; font-weight:500px; " behavior="alternate">
+        Favourite Movies
+      </marquee>
+    </div>
+    <hr>
+
+    <div class="d-flex flex-wrap">
+      <div class="col mb-4" *ngFor="let movie of movies">
+        
+        <div class="text-center card" >
+             <div>
+              <a [routerLink]="['/movie', movie.id]" class="text-decoration-none text-reset">
+                <img [src]="img + movie.poster_path">
+              </a>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn btn-danger w-100" (click)="removeFromFavourites(movie.id)">
+                  <small class="btn text-white mb-0">Delete </small>
+                </button>
+                <small>{{movie.title}}</small>
+            </div>
+          </div>
+
+          <!-- <h6 class="mb-0 text-center"></h6> -->
+
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<app-footer></app-footer>

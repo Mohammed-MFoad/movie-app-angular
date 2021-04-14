@@ -16,7 +16,10 @@ a {
 
 @media (max-width: 768px) {
     a{
-        font-size: 12px;
+        font-size: 10px;
+    }
+    small{
+        font-size: 8px;
     }
     .navbar{
         height: 50px;

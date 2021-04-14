@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';  
 import { MovieDetailsComponent } from './components/movies/movie-details/movie-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FavouriteMoviesComponent } from './components/movies/favourite-movies/favourite-movies.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     FooterComponent,
     MoviesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    FavouriteMoviesComponent
   ],
   imports: [
     BrowserModule,
